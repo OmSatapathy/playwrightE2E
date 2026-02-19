@@ -1,4 +1,6 @@
 import { Page, Locator, expect } from '@playwright/test';
+import path from 'path';
+
 export class DemoqaHome {
 
     readonly page: Page;
@@ -58,6 +60,7 @@ export class DemoqaHome {
     async clickOnUploadAndDownload() {
         await this.elements.click();
         await this.page.locator("//span[contains(text(),'Upload and Download')]").click();
-        await this.page.locator("#uploadFile").setInputFiles("C:\\Users\\pc\\Downloads\\radhe.jpg");
+        const filePath = path.resolve(__dirname, '../testdata/radhe.jpg');
+        await this.page.locator("#uploadFile").setInputFiles(filePath);
     }   
 }
