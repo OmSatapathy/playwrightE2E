@@ -17,6 +17,8 @@ export class RegisterPage {
     private dob: Locator;
     private Password: Locator;
     private confirmPwd: Locator;
+    private fileImage: Locator;
+    private submitBTN: Locator
 
 
     constructor(page: Page) {
@@ -34,6 +36,9 @@ export class RegisterPage {
         this.dob = page.locator("#msdd")
         this.Password = page.locator("#firstpassword")
         this.confirmPwd = page.locator("#secondpassword")
+
+        this.fileImage = page.locator("#imagesrc")
+        this.submitBTN = page.locator("#submitbtn")
     }
 
     async verifyRegister() {
@@ -45,12 +50,12 @@ export class RegisterPage {
         await this.phone.fill(registeruser.phone)
         await this.gender.click()
         await this.hobbies.click()
-        await this.language.waitFor({state:'visible'})
+        await this.language.waitFor({ state: 'visible' })
     }
 
 
     async verifyDropdownforRegistation() {
-        await this.skill.waitFor({state:'visible'})
+        await this.skill.waitFor({ state: 'visible' })
 
         await this.page.locator("#Skills").selectOption({ "index": 3 })
         await this.page.waitForTimeout(2000)
@@ -58,7 +63,12 @@ export class RegisterPage {
         await this.page.waitForTimeout(2000)
         console.log(await this.skill.textContent())
 
-        
+        await this.Password.fill(registeruser.password)
+        await this.Password.fill(registeruser.confirmPwd)
+
+        await this.fileImage.setInputFiles("../../testdata/radhe.jpg")
+        await this.page.waitForTimeout(2000)
+        await this.submitBTN.click()
 
     }
 
