@@ -38,7 +38,7 @@ export class RegisterPage {
         this.Password = page.locator("#firstpassword")
         this.confirmPwd = page.locator("#secondpassword")
 
-        this.fileImage = page.locator("#imagesrc")
+        this.fileImage = page.locator("//input[@type='file']")
         this.submitBTN = page.locator("#submitbtn")
     }
 
