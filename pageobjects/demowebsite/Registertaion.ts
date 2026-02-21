@@ -1,5 +1,6 @@
 import { Page, Locator } from '@playwright/test'
 import registeruser from '../../testdata/registeruser.json'
+import path from 'path';
 
 export class RegisterPage {
 
@@ -66,7 +67,8 @@ export class RegisterPage {
         await this.Password.fill(registeruser.password)
         await this.Password.fill(registeruser.confirmPwd)
 
-        await this.fileImage.setInputFiles("../../testdata/radhe.jpg")
+        const filePath = path.resolve(__dirname, '../testdata/radhe.jpg');
+        await this.fileImage.setInputFiles(filePath)
         await this.page.waitForTimeout(2000)
         await this.submitBTN.click()
 
