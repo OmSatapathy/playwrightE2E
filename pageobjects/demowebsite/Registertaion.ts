@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test'
+import registeruser from '../../testdata/registeruser.json'
 
 export class RegisterPage {
 
@@ -37,11 +38,11 @@ export class RegisterPage {
 
     async verifyRegister() {
         await this.firstname.click()
-        await this.firstname.fill("Dhanush")
-        await this.lastname.fill("Sekhar")
-        await this.address.fill("89th lane,Delhi")
-        await this.email.fill("dhanush78@gmail.com")
-        await this.phone.fill("7747666433")
+        await this.firstname.fill(registeruser.firstname)
+        await this.lastname.fill(registeruser.lastname)
+        await this.address.fill(registeruser.address)
+        await this.email.fill(registeruser.email)
+        await this.phone.fill(registeruser.phone)
         await this.gender.click()
         await this.hobbies.click()
         await this.language.waitFor({state:'visible'})
