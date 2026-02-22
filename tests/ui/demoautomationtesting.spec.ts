@@ -81,5 +81,5 @@ test("selenium website windowhandle", async ({ browser }) => {
     await twitterPage.waitForLoadState();
     console.log("Twitter URL:", twitterPage.url());
 
-
 })
+
