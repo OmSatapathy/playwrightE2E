@@ -60,3 +60,33 @@ test("verify bottom section", async ({ page }) => {
     console.log("title is:" + await page.title())
 
 })
+
+test("search and verify agents", async ({ page }) => {
+
+    await page.goto("https://onereal.com/search-agent?search_label=");
+
+    const agentNames = page.locator("//p[contains(@class,'text-lg')]");
+    const agentLocations = page.locator("//p[contains(@class,'text-sm')]");
+
+    const count = await agentNames.count();
+
+    for (let i = 0; i < count; i++) {
+
+        const name = await agentNames.nth(i).textContent();
+        const location = await agentLocations.nth(i).textContent();
+
+        console.log(name?.trim() + " => " + location?.trim());
+
+        if (name?.trim() === "Aaron Arreola Moreno") {
+
+            await agentNames.nth(i).click();
+
+            const targetAgent = page.locator("//span[contains(@class,'break-words')]").first();
+
+            await expect(targetAgent).toContainText("Aaron Arreola Moreno");
+
+            break;
+        }
+    }
+
+});
