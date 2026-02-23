@@ -23,27 +23,40 @@ test("verify homepage", async ({ page }) => {
 
 })
 
-test("verify industries",async({page})=>{
+test("verify industries", async ({ page }) => {
 
-   await page.goto("https://tracextech.com/")
+    await page.goto("https://tracextech.com/")
     await page.waitForLoadState("domcontentloaded")
-    await page.getByRole("link",{ name:'Industries'}).click()
+    await page.getByRole("link", { name: 'Industries' }).click()
     await page.waitForTimeout(4000)
 
-    await page.getByRole('link',{name:'Processor'}).click()
+    await page.getByRole('link', { name: 'Processor' }).click()
 
     expect(page.url()).toStrictEqual("https://tracextech.com/industry/processor/")
 
 })
 
-test("verify footer links",async({page})=>{
+test("verify footer links", async ({ page }) => {
 
     await page.goto("https://tracextech.com/")
     await page.waitForLoadState("domcontentloaded")
 
-    const  value =await page.getByRole("link",{name:'Contact Us'})
+    const value = await page.getByRole("link", { name: 'Contact Us' })
     await value.scrollIntoViewIfNeeded()
 
-    await page.getByRole("link",{name:'Contact Us'}).click()
-    await page.waitForTimeout(4000)
+    const allIteam = await page.locator("//h4[@class='elementor-heading-title elementor-size-default']")
+    const count = await allIteam.count()
+
+    for (let i = 0; i < count; i++) {
+        const textvalue = await allIteam.nth(i).textContent()
+        console.log(textvalue)
+        if(textvalue?.trim() === 'Webinars'){
+               await allIteam.nth(i).click()
+               console.log("clicked !!!")
+               await page.waitForTimeout(4000)
+               break;
+        }
+
+    }
+
 })
