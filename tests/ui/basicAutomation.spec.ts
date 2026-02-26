@@ -32,4 +32,10 @@ test('validate and verify', async ({ page }) => {
     await page.locator("select#state").selectOption({ value: "Puducherry" })
     await page.waitForTimeout(2000)
 
+
+    await page.selectOption('select#hobbies',{label:"Reading"})
+    await page.waitForTimeout(2000)
+    await page.selectOption('select#hobbies',{index:2})
+
+
 })
