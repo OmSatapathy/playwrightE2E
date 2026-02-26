@@ -8,7 +8,7 @@ test.use({
 
 test.beforeEach("opening website", async({page})=>{
    await page.goto("https://learn-automation.com/")
-   await page.waitForLoadState('load')
+   await page.waitForLoadState('domcontentloaded')
 })
 
 test("verifying homepage of learn automation", async({page})=>{
@@ -22,7 +22,11 @@ test("verifying homepage of learn automation", async({page})=>{
 
 test(" verify dropdowon from options", async({page})=>{
 
+    await page.waitForTimeout(3000)
     const obj = new LearnAutomationHomepge(page)
     obj.selectDropdown()
       
 })
+
+
+

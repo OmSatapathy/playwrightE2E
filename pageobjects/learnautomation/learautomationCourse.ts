@@ -16,7 +16,7 @@ export class LearnAutomationHomepge {
         this.titles = page.locator("#entry-title")
         this.facrbookpage = page.locator(".facebook")
 
-        this.selectMonth =page.locator("//select[@id='archives-dropdown-3']")
+        this.selectMonth = page.locator("//select[@id='archives-dropdown-3']")
 
 
     }
@@ -32,7 +32,7 @@ export class LearnAutomationHomepge {
             const values = await allItem.nth(i).textContent()
             console.log(values)
 
-            if(values?.trim()==='Automation Tools and Different Tools'){
+            if (values?.trim() === 'Automation Tools and Different Tools') {
 
                 await allItem.nth(i).hover()
                 await this.page?.locator("//a[normalize-space(.) = 'testRigor']").click()
@@ -47,12 +47,13 @@ export class LearnAutomationHomepge {
     }
 
 
-    async selectDropdown(){
+    async selectDropdown() {
 
+        await this.page?.locator("//select[@id='archives-dropdown-3']").click()
         await this.selectMonth.scrollIntoViewIfNeeded()
 
-        await this.selectMonth.selectOption({'value':'https://learn-automation.com/2016/11/'})
-       const value = await this.selectMonth.innerText()
-       console.log(value)
+        await this.selectMonth.selectOption({ 'value': 'https://learn-automation.com/2016/11/' })
+        const value = await this.selectMonth.innerText()
+        console.log(value)
     }
 }
