@@ -1,4 +1,5 @@
 import { Page, Locator } from '@playwright/test'
+import automation from "../../testdata/automation.json"
 
 export class LearnAutomationHomepge {
 
@@ -8,7 +9,11 @@ export class LearnAutomationHomepge {
 
     readonly facrbookpage: Locator;
 
-    readonly selectMonth: Locator
+    readonly selectMonth: Locator;
+
+
+    readonly emailfield: Locator;
+    readonly passwodfield: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -17,6 +22,9 @@ export class LearnAutomationHomepge {
         this.facrbookpage = page.locator(".facebook")
 
         this.selectMonth = page.locator("//select[@id='archives-dropdown-3']")
+
+        this.emailfield = page.getByPlaceholder("Enter Email")
+        this.passwodfield = page.getByPlaceholder("Enter Password")
 
 
     }
@@ -55,5 +63,10 @@ export class LearnAutomationHomepge {
         await this.selectMonth.selectOption({ 'value': 'https://learn-automation.com/2016/11/' })
         const value = await this.selectMonth.innerText()
         console.log(value)
+    }
+
+    async doLogin(user: { username: string; pwd: string }) {
+        await this.emailfield.fill(user.username);
+        await this.passwodfield.fill(user.pwd);
     }
 }

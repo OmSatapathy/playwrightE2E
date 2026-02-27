@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test'
+import automation from '../../testdata/automation.json';
+import { LearnAutomationHomepge } from '../../pageobjects/learnautomation/learautomationCourse'
 
 test('validate and verify', async ({ page }) => {
 
@@ -23,7 +25,7 @@ test('validate and verify', async ({ page }) => {
 
     }
 
-   // await page.locator("//option[contains(text(),'Select State')]").click()
+    // await page.locator("//option[contains(text(),'Select State')]").click()
 
     await page.locator("select#state").selectOption({ label: 'Arunachal Pradesh' })
     await page.waitForTimeout(2000)
@@ -33,9 +35,23 @@ test('validate and verify', async ({ page }) => {
     await page.waitForTimeout(2000)
 
 
-    await page.selectOption('select#hobbies',{label:"Reading"})
+    await page.selectOption('select#hobbies', { label: "Reading" })
     await page.waitForTimeout(2000)
-    await page.selectOption('select#hobbies',{index:2})
+    await page.selectOption('select#hobbies', { index: 2 })
 
+
+})
+
+
+test("data driven test with json file", async ({ page }) => {
+
+    await page.goto("https://freelance-learn-automation.vercel.app/login")
+    await page.waitForLoadState('domcontentloaded')
+
+    const obj = new LearnAutomationHomepge(page)
+    for (const user of automation) {
+        await obj.doLogin(user);
+        await page.waitForTimeout(2000)
+    }
 
 })
