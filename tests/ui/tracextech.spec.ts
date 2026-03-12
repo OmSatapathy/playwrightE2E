@@ -6,13 +6,15 @@ test("verify homepage", async ({ page }) => {
     await page.locator("(//a[contains(text(),'Solutions')])[3]").click()
 
     const links = await page.locator("//a[@class='elementor-sub-item']")
+ 
 
     const count = await links.count()
 
     for (let i = 0; i < count; i++) {
         const value = await links.nth(i).textContent()
+        console.log(value)
         if (value?.trim() === 'Sustainability') {
-         await page.getByRole('link', { name: 'Sustainability' }).click()
+            await page.getByRole('link', { name: 'Sustainability' }).click()
             await page.waitForTimeout(4000)
             break;
         }
@@ -44,7 +46,7 @@ test("verify footer links", async ({ page }) => {
     const value = await page.getByRole("link", { name: 'Contact Us' })
     await value.scrollIntoViewIfNeeded()
 
-    await page.screenshot({ path: '/screenshot/screen1.png', fullPage: true})
+    await page.screenshot({ path: '/screenshot/screen1.png', fullPage: true })
 
     const allIteam = await page.locator("//h4[@class='elementor-heading-title elementor-size-default']")
     const count = await allIteam.count()
@@ -52,12 +54,12 @@ test("verify footer links", async ({ page }) => {
     for (let i = 0; i < count; i++) {
         const textvalue = await allIteam.nth(i).textContent()
         console.log(textvalue)
-        if(textvalue?.trim() === 'Webinars'){
-               await allIteam.nth(i).click()
-               console.log("clicked !!!")
-               await page.waitForTimeout(4000)
-               await page.screenshot({ path: '../../screenshot/screen.png', fullPage: true})
-               break;
+        if (textvalue?.trim() === 'Webinars') {
+            await allIteam.nth(i).click()
+            console.log("clicked !!!")
+            await page.waitForTimeout(4000)
+            await page.screenshot({ path: '../../screenshot/screen.png', fullPage: true })
+            break;
         }
 
     }
