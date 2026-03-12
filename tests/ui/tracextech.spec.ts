@@ -12,7 +12,7 @@ test("verify homepage", async ({ page }) => {
     for (let i = 0; i < count; i++) {
         const value = await links.nth(i).textContent()
         if (value?.trim() === 'Sustainability') {
-            page.getByRole('link', { name: 'Sustainability' }).click()
+         await page.getByRole('link', { name: 'Sustainability' }).click()
             await page.waitForTimeout(4000)
             break;
         }
